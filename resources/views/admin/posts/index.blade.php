@@ -1,6 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+    @if (session('message'))
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert {{session('message')['success'] ? 'alert-success' : 'alert-danger'}} text-center">
+                        <p>Operation Type: {{session('message')['type']}}</p>
+                        <p>PostID: {{session('message')['id']}}</p>
+                        <strong>{{session('message')['success'] ? 'SUCCESSFUL' : 'FAILED'}}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     <table class="table table-striped">
         <thead>
             <tr>
@@ -22,7 +35,13 @@
                 <td>{{$post->updated_at}}</td>
                 <td><a class="btn btn-primary" href="{{route('admin.posts.show', $post->slug)}}">View</a></td>
                 <td><a class="btn btn-secondary" href="">Edit</a></td>
-                <td><a class="btn btn-danger" href="">Delete</a></td>
+                <td>
+                    <form action="{{route('admin.posts.destroy', $post->id)}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                </td>
             </tr>
         @endforeach
         </tbody>

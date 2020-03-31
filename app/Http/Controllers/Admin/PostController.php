@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Post;
+use Exception;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
@@ -47,12 +49,13 @@ class PostController extends Controller
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param Post $post
-	 * @return void
+	 * @param Post $slug
+	 * @return Factory|View
 	 */
-    public function show(Post $post)
+    public function show($slug)
     {
-        //
+        $post = Post::where('slug', $slug)->first();
+		return view('admin.posts.show', compact('post'));
     }
 
 	/**
@@ -82,10 +85,25 @@ class PostController extends Controller
 	 * Remove the specified resource from storage.
 	 *
 	 * @param Post $post
-	 * @return void
+	 * @return RedirectResponse
+	 * @throws Exception
 	 */
     public function destroy(Post $post)
     {
-        //
+        if (empty($post)) {
+        	abort('404');
+		}
+		$id = $post->id;
+        $deleted = $post->delete();
+
+        $data = [
+			'type' => 'DELETE',
+			'success' => $deleted,
+			'id' => $id
+		];
+
+        return redirect()->route('admin.posts.index')->with('message', $data);
+
+
     }
 }
