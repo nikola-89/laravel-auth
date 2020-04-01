@@ -8,7 +8,22 @@ use App\Post;
 class PostController extends Controller
 {
     public function index() {
+
 		$posts = Post::all();
+
 		return view('guest.posts.index', compact('posts'));
+	}
+
+	public function show($slug) {
+
+    	$post = Post::where('slug', $slug)->first();
+
+    	if (empty($post)) {
+
+    		return view('guest.posts.index');
+		}
+
+    	return view('guest.posts.show', compact('post'));
+
 	}
 }

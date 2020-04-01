@@ -20,4 +20,13 @@ Maecenas venenatis dui in nunc mattis, vel interdum lacus efficitur. Fusce digni
 
     	return $loremFull;
 	}
+
+	public static function gimmeLittleLorem() {
+
+		$littleLorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+		 Quisque dapibus ante id venenatis semper. 
+		 Etiam eget nunc accumsan, imperdiet orci at, rutrum nisi.';
+
+		return $littleLorem;
+	}
 }
