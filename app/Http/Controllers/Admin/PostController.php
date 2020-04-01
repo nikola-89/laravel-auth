@@ -145,7 +145,6 @@ class PostController extends Controller
 
 		$post->title = $data['title'];
 		$post->body = $data['body'];
-		$post->slug = SlugService::createSlug(Post::class, 'slug', $data['title']);
 		$post->updated_at = Carbon::now()->setTimezone('Europe/Zurich');
 
 		$updated = $post->update();
