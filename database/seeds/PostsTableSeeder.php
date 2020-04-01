@@ -1,6 +1,6 @@
 <?php
-
-use Illuminate\Database\Seeder;
+	use Cviebrock\EloquentSluggable\Services\SlugService;
+	use Illuminate\Database\Seeder;
 use App\Post;
 use App\User;
 use App\Services;
@@ -21,7 +21,7 @@ use Illuminate\Support\Str;
 				$newPost = new Post;
 				$newPost->title = 'POST_' . $i . '_' . $user->id;
 				$newPost->body = Services\Service::gimmeLorem();
-				$newPost->slug = Str::slug($newPost->title . '-' . $user->id);
+				$newPost->slug = SlugService::createSlug(Post::class, 'slug', $newPost->title);
 				$newPost->user_id = $user->id;
 				$newPost->save();
 			}

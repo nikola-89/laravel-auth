@@ -154,7 +154,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1585672514737</updated>
-      <workItem from="1585672518662" duration="28299000" />
+      <workItem from="1585672518662" duration="29193000" />
     </task>
     <servers />
   </component>
@@ -162,6 +162,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="690" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1585708776857">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585708776857" />
     <state x="609" y="321" key="NewPhpClassDialog" timestamp="1585677302970">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -170,9 +174,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="764" y="439" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585683960324" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1585672628498">
+    <state x="616" y="240" key="run.anything.popup" timestamp="1585708856564">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585672628498" />
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585708856564" />
   </component>
 </project>
