@@ -171,7 +171,15 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         if (empty($post)) {
-        	abort('404');
+
+			$data = [
+				'type' => 'DELETE',
+				'success' => false,
+				'id' => 'UNKNOWN',
+				'sms' => 'MISSING DATA'
+			];
+
+			return redirect()->route('admin.posts.index')->with('message', $data);
 		}
 		$id = $post->id;
         $deleted = $post->delete();
