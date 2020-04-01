@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Post;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -82,7 +83,7 @@ class PostController extends Controller
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param Post $slug
+	 * @param $slug
 	 * @return Factory|View
 	 */
     public function show($slug)
@@ -94,12 +95,13 @@ class PostController extends Controller
 	/**
 	 * Show the form for editing the specified resource.
 	 *
-	 * @param Post $post
-	 * @return void
+	 * @param $slug
+	 * @return Factory|View
 	 */
-    public function edit(Post $post)
+    public function edit($slug)
     {
-        //
+		$post = Post::where('slug', $slug)->first();
+		return view('admin.posts.edit', compact('post'));
     }
 
 	/**
@@ -107,11 +109,56 @@ class PostController extends Controller
 	 *
 	 * @param Request $request
 	 * @param Post $post
-	 * @return void
+	 * @return RedirectResponse
 	 */
     public function update(Request $request, Post $post)
     {
-        //
+
+    	if (empty($post)) {
+
+			$data = [
+				'type' => 'EDIT',
+				'success' => false,
+				'id' => 'UNKNOWN',
+				'sms' => 'MISSING DATA'
+			];
+
+			return redirect()->route('admin.posts.index')->with('message', $data);
+		}
+
+		$userId = $this->user()->id;
+
+    	if ($userId != $post->user_id) {
+
+			$data = [
+				'type' => 'EDIT',
+				'success' => false,
+				'id' => $post->id,
+				'sms' => 'USER MISMATCH'
+			];
+
+			return redirect()->route('admin.posts.index')->with('message', $data);
+
+		}
+
+		$request->validate($this->validatePostRules);
+
+		$data = $request->all();
+
+		$post->title = $data['title'];
+		$post->body = $data['body'];
+		$post->slug = SlugService::createSlug(Post::class, 'slug', $data['title']);
+		$post->updated_at = Carbon::now();
+
+		$updated = $post->update();
+
+		$data = [
+			'type' => 'EDIT',
+			'success' => $updated,
+			'id' => $post->id
+		];
+
+		return redirect()->route('admin.posts.index')->with('message', $data);
     }
 
 	/**
@@ -140,9 +187,12 @@ class PostController extends Controller
 
     }
 
+    // ---------------------------------------------------------------------------------
+
 	private function user()
 	{
 		return Auth::user();
 	}
 
+	// ---------------------------------------------------------------------------------
 }
