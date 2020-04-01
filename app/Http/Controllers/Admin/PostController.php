@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -66,7 +65,6 @@ class PostController extends Controller
 		$newPost->title = $data['title'];
 		$newPost->body = $data['body'];
 		$newPost->user_id = $userId;
-		$newPost->slug = SlugService::createSlug(Post::class, 'slug', $data['title']);
 
 		$saved = $newPost->save();
 
