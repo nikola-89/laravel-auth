@@ -19,8 +19,11 @@ class Post extends Model
 		'updated_at'
 	];
 
-	public function sluggable()
-	{
+    public function user() {
+		return $this->belongsTo('App\User');
+	}
+
+	public function sluggable() {
 		return [
 			'slug' => [
 				'source' => 'title'

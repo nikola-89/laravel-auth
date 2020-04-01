@@ -128,7 +128,7 @@ class PostController extends Controller
 
 		$userId = $this->user()->id;
 
-    	if ($userId != $post->user_id) {
+    	if ($userId != $post->user->id) {
 
 			$data = [
 				'type' => 'EDIT',
