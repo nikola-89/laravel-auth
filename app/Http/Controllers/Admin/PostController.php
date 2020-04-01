@@ -10,10 +10,22 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class PostController extends Controller
 {
+	private $validatePostRules;
+
+	public function __construct()
+	{
+		$this->validatePostRules = [
+			'title' => 'required|string|max:255',
+			'body' => 'required|string',
+		];
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -28,22 +40,43 @@ class PostController extends Controller
 	/**
 	 * Show the form for creating a new resource.
 	 *
-	 * @return void
+	 * @return Factory|View
 	 */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
 	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @param Request $request
-	 * @return void
+	 * @return RedirectResponse
 	 */
     public function store(Request $request)
     {
-        //
+    	$request->validate($this->validatePostRules);
+
+		$data = $request->all();
+
+		$userId = $this->user()->id;
+
+		$newPost = new Post;
+		$newPost->title = $data['title'];
+		$newPost->body = $data['body'];
+		$newPost->user_id = $userId;
+		$newPost->slug = SlugService::createSlug(Post::class, 'slug', $data['title']);
+
+		$saved = $newPost->save();
+
+
+		$data = [
+			'type' => 'CREATE',
+			'success' => $saved,
+			'id' => $newPost->id
+		];
+
+		return redirect()->route('admin.posts.index')->with('message', $data);
     }
 
 	/**
@@ -106,4 +139,10 @@ class PostController extends Controller
 
 
     }
+
+	private function user()
+	{
+		return Auth::user();
+	}
+
 }
