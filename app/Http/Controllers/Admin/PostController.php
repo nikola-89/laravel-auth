@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Post;
+use App\Tag;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Contracts\View\Factory;
@@ -44,7 +45,9 @@ class PostController extends Controller
 	 */
     public function create()
     {
-        return view('admin.posts.create');
+    	$tags = Tag::all();
+
+        return view('admin.posts.create', compact('tags'));
     }
 
 	/**

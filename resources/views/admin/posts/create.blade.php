@@ -29,8 +29,17 @@
                     <label for="body">Body</label>
                     <textarea id="body" name="body" class="form-control mb-4" rows="15" placeholder=""></textarea>
 
-                    <input type="hidden" name="user_id" value="{{Auth::id()}}">
+                    <div class="form-group">
+                        <label for="tags">Tags</label>
+                        @foreach($tags as $tag)
+                            <div class="d-flex align-items-center">
+                                <input class="mr-1" type="checkbox" name="tags[]" id="tags" value="{{$tag->id}}">
+                                <span>{{$tag->name}}</span>
+                            </div>
+                        @endforeach
+                    </div>
 
+                    <input type="hidden" name="user_id" value="{{Auth::id()}}">
                     <button class="btn btn-success" type="submit">Save</button>
                 </form>
             </div>
