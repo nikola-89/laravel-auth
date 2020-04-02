@@ -14,6 +14,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use function Illuminate\Support\Facades\Blade;
 
 class PostController extends Controller
 {
@@ -162,8 +163,16 @@ class PostController extends Controller
 
 		$updated = $post->update();
 
-		if (!empty($data['tags'])) {
-			$post->tags()->sync($data['tags']);
+		$tags = $data['tags'];
+
+		foreach ($tags as $k => $tag) {
+			if (empty(Tag::find($tag))) {
+				unset($tags[$k]);
+			}
+		}
+
+		if (!empty($tags)) {
+			$post->tags()->sync($tags);
 		}
 
 		$data = [

@@ -129,7 +129,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="ToolWindowEvent Log.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="IntelliLang.Configuration" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -155,7 +155,7 @@
       <option name="presentableId" value="Default" />
       <updated>1585672514737</updated>
       <workItem from="1585672518662" duration="37149000" />
-      <workItem from="1585751622233" duration="13050000" />
+      <workItem from="1585751622233" duration="14122000" />
     </task>
     <servers />
   </component>
@@ -175,6 +175,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="764" y="439" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585683960324" />
+    <state x="491" y="163" key="SettingsEditor" timestamp="1585805134761">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="491" y="163" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585805134761" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1585708856564">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
