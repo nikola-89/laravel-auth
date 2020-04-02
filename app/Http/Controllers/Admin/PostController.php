@@ -71,6 +71,9 @@ class PostController extends Controller
 
 		$saved = $newPost->save();
 
+		if (!empty($data['tags'])) {
+			$newPost->tags()->sync($data['tags']);
+		}
 
 		$data = [
 			'type' => 'CREATE',
@@ -102,7 +105,14 @@ class PostController extends Controller
     public function edit($slug)
     {
 		$post = Post::where('slug', $slug)->first();
-		return view('admin.posts.edit', compact('post'));
+		$tags = Tag::all();
+
+		$data = [
+			'post' => $post,
+			'tags' => $tags
+		];
+
+		return view('admin.posts.edit', $data);
     }
 
 	/**
@@ -151,6 +161,10 @@ class PostController extends Controller
 		$post->updated_at = Carbon::now()->setTimezone('Europe/Zurich');
 
 		$updated = $post->update();
+
+		if (!empty($data['tags'])) {
+			$post->tags()->sync($data['tags']);
+		}
 
 		$data = [
 			'type' => 'EDIT',

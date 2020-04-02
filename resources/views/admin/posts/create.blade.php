@@ -23,11 +23,15 @@
 
                     <p class="h4 mb-4 text-center">New Post</p>
 
-                    <label for="title">Title</label>
-                    <input type="text" id="title" name="title" class="form-control mb-4" placeholder="">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" id="title" name="title" class="form-control mb-4" placeholder="">
+                    </div>
 
-                    <label for="body">Body</label>
-                    <textarea id="body" name="body" class="form-control mb-4" rows="15" placeholder=""></textarea>
+                    <div class="form-group">
+                        <label for="body">Body</label>
+                        <textarea id="body" name="body" class="form-control mb-4" rows="15" placeholder=""></textarea>
+                    </div>
 
                     <div class="form-group">
                         <label for="tags">Tags</label>
