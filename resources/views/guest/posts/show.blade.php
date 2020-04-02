@@ -9,6 +9,7 @@
                         <div class="card-body">
                             <h5 class="card-title text-center">{{$post->title}}</h5>
                             <p class="card-text">{{$post->body}}</p>
+                            <p class="card-text mt-5">@foreach ($post->tags as $tag) <a href="#">#{{$tag->name}}</a> @endforeach</p>
                         </div>
                         <div class="card-footer text-muted d-flex justify-content-between align-items-center">
                             <p class="card-text m-0">{{$post->user->name}} il {{$post->created_at}}</p>
@@ -23,7 +24,7 @@
                     <div class="comment mb-5">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title text-center">{{$comment->title}}</h5>
+                                <h6 class="card-title text-left">{{$comment->title}}</h6>
                                 <p class="card-text">{{$comment->body}}</p>
                             </div>
                             <div class="card-footer text-muted d-flex justify-content-between align-items-center">
